@@ -15,6 +15,9 @@ class Client(models.Model):
     age=models.IntegerField(validators=[MinValueValidator(18)])
     points=models.IntegerField(validators=[MinValueValidator(0)],null=True)
 
+    def __str__(self):
+    		return '{} {}'.format(self.name)
+
 class Bonus(models.Model):
 
     id=models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
