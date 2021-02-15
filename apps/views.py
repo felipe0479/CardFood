@@ -3,4 +3,4 @@ from django.shortcuts import render
 # Create your views here.
 
 def post_list(request):
-    return render(request, 'app/product_list.html', {})
+    return render(request, 'apps/product_list.html', {})
