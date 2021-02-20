@@ -2,5 +2,11 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.post_list, name='product_list'),
+    path("client/<int:id>",views.get_client),
+    path("bonus/<int:id>",views.get_bonus_client),
+    path("delete_bonus/<int:id>",views.delete_bonus_client),
+    path("create_bonus/<int:id>/<str:emp>/<int:pts>",views.create_bonus_client),
+    path("create_card/<int:id>/<str:code>",views.create_card),
+    path("deactivate_card/<int:id>",views.deactivate_card),
+    
 ]

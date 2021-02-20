@@ -14,9 +14,10 @@ class Client(models.Model):
     name=models.CharField(max_length=50)
     age=models.IntegerField(validators=[MinValueValidator(18)])
     points=models.IntegerField(validators=[MinValueValidator(0)],null=True)
+    celular=models.IntegerField(blank=True,null=True)
+    cedula=models.IntegerField(blank=True,null=True)
 
-    def __str__(self):
-    		return '{} {}'.format(self.name)
+    
 
 class Bonus(models.Model):
 
@@ -30,6 +31,7 @@ class Bonus(models.Model):
 
 class Card(models.Model):
     
+    codigo=models.CharField(max_length=100,null=True)
     date=models.DateTimeField(auto_now_add=True)
     status=models.BooleanField(default=True)
     owner=models.ForeignKey(Client,on_delete= models.CASCADE)

@@ -25,7 +25,7 @@ SECRET_KEY = 'u*8u^+6havfvsd)+c4b!mv@#+$x=s21#(0%6@!*-nz2n-w6k$8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '.cardfood.com','jsilva2021.pythonanywhere.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'cardfood.com','jsilva2021.pythonanywhere.com']
 
 
 # Application definition
@@ -55,7 +55,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'apps/templates')],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
