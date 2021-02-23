@@ -18,10 +18,24 @@ def get_client(request,id):
         puntos=client.points
         celular=client.celular
         cedula=client.cedula
+        chat_id=client.chat_id
 
-        return JsonResponse({ 'Nombre': nombre, 'edad': edad,'puntos':puntos,'celular':celular,'cedula':cedula })
+        return JsonResponse({ 'Nombre': nombre, 'edad': edad,'puntos':puntos,'celular':celular,'cedula':cedula,'chat_id':chat_id })
     except:
         return JsonResponse({ 'Msg' :"El usuario no exite"})
+def client_by_card(request,id):
+    try:
+        card=get_object_or_404(Card, codigo=id)
+        nombre=card.owner.name
+        edad=card.owner.age
+        puntos=card.owner.points
+        celular=card.owner.celular
+        cedula=card.owner.cedula
+        chat_id=card.owner.chat_id
+
+        return JsonResponse({ 'Nombre': nombre, 'edad': edad,'puntos':puntos,'celular':celular,'cedula':cedula ,'chat_id':chat_id})
+    except:
+        return JsonResponse({ 'Msg' :"La Tarjeta no existe"})
 
 def get_bonus_client(request,id):
     try:

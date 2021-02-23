@@ -16,6 +16,7 @@ class Client(models.Model):
     points=models.IntegerField(validators=[MinValueValidator(0)],null=True)
     celular=models.IntegerField(blank=True,null=True)
     cedula=models.IntegerField(blank=True,null=True)
+    chat_id=models.IntegerField(blank=True,null=True)
 
     
 
