@@ -128,7 +128,7 @@ def bonus_by_id(request,id):
         try:
             bono=Bonus.objects.get(client=client,status=True).all()
             i=1
-            if bono=!'':
+            if bono is not '':
                 for b in bono:
                     
                     cupon=bono.id
