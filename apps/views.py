@@ -134,7 +134,7 @@ def bonus_by_id(request,id):
                     cupon=bono.id
                     cupon=str(cupon)
                     empresa=bono.empresa.title
-                    data.update({'cupon'+i:cupon,'empresa'+i:empresa})    
+                    data.update({'cupon '+str(i):cupon,'empresa '+str(i):empresa})    
                     i=i+1
 
 
