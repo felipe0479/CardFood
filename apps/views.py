@@ -4,7 +4,8 @@ from django.shortcuts import get_object_or_404
 
 from .models import Client,Bonus,Empresa,Card
 
-
+import json
+from django.http import HttpResponse
 # Create your views here.
 
 """def post_list(request):
@@ -122,13 +123,13 @@ def deactivate_card(request,id):
         return JsonResponse({ 'Msg' :"El usuario no exite"})
 
 def bonus_by_id(request,id):
-    data={}
+    data=[]
     try:
         client=get_object_or_404(Client, chat_id=id)
         try:
             print("Entra a try")
             bono=Bonus.objects.filter(client=client,status=True).all()
-            i=1
+            
             print("encuentra bonos")
             if bono is not '':
                 print("entra en el if ")
@@ -137,12 +138,13 @@ def bonus_by_id(request,id):
                     cupon=b.id
                     cupon=str(cupon)
                     empresa=b.empresa.title
-                    data.update({'cupon '+str(i):cupon,'empresa '+str(i):empresa})    
+                    dic={'cupon':cupon,'empresa':empresa}
+                    data.append(dic)    
                     print("imprimimos la data",data)
-                    i=i+1
+                    
 
 
-            return JsonResponse(data)
+            return HttpResponse(json.dumps(data), content_type="application/json")
         except:
             return JsonResponse({ 'Msg' :"El usuario no tiene bono"})
 
