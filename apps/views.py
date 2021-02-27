@@ -127,8 +127,9 @@ def bonus_by_id(request,id):
         client=get_object_or_404(Client, chat_id=id)
         try:
             print("Entra a try")
-            bono=Bonus.objects.get(client=client,status=True).all()
+            bono=Bonus.objects.filter(client=client,status=True).all()
             i=1
+            print("encuentra bonos")
             if bono is not '':
                 print("entra en el if ")
                 for b in bono:
