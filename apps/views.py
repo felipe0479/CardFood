@@ -76,20 +76,14 @@ def create_bonus_client(request,id,emp,pts):
         client=get_object_or_404(Client, cedula=id)
         print("si hay client")
         empresa=get_object_or_404(Empresa,title=emp)
-        print("si ahy empresa")
-        try:
-            bono=get_object_or_404(Bonus,client=client,status=True)
-            
-            return JsonResponse({ 'Msg' :"El usuario tiene cupon viegente"})
-        except:
-            
-            nombre=client.name
-            bono=Bonus(empresa=empresa,points=pts,client=client)
-            bono.save()
-            client.points=client.points+pts
-            client.save()
-            ptos=client.points
-            cupon=bono.id
+        print("si ahy empresa")    
+        nombre=client.name
+        bono=Bonus(empresa=empresa,points=pts,client=client)
+        bono.save()
+        client.points=client.points+pts
+        client.save()
+        ptos=client.points
+        cupon=bono.id
         return JsonResponse({ 'Msg' :"Cupon creado exitosamente","name":nombre,"cupon":cupon,"puntos":ptos})
 
     except:
@@ -128,14 +122,22 @@ def deactivate_card(request,id):
         return JsonResponse({ 'Msg' :"El usuario no exite"})
 
 def bonus_by_id(request,id):
+    data={}
     try:
         client=get_object_or_404(Client, chat_id=id)
-        try:
-            bono=get_object_or_404(Bonus,client=client,status=True)
+        
+        bono=Bonus.objects.get(client=client,status=True).all()
+        i=1
+        for b in bono:
+            
             cupon=bono.id
+            cupon=str(cupon)
             empresa=bono.empresa.title
+            data.update({'cupon'+i:cupon,'empresa'+i:empresa})    
+            i=i+1
 
-            return JsonResponse({ 'Msg' :"El usuario tiene cupon","cupon":cupon,"empresa":empresa})
+
+        return JsonResponse(data)
         except:
             return JsonResponse({ 'Msg' :"El usuario no tiene bono"})
 
