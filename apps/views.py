@@ -138,8 +138,7 @@ def bonus_by_id(request,id):
 
 
         return JsonResponse(data)
-        except:
-            return JsonResponse({ 'Msg' :"El usuario no tiene bono"})
+        
 
     except:
         return JsonResponse({ 'Msg' :"El usuario no exite"})
