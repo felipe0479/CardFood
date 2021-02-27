@@ -126,3 +126,18 @@ def deactivate_card(request,id):
 
     except:
         return JsonResponse({ 'Msg' :"El usuario no exite"})
+
+def bonus_by_id(request,id):
+    try:
+        client=get_object_or_404(Client, chat_id=id)
+        try:
+            bono=get_object_or_404(Bonus,client=client,status=True)
+            cupon=bono.id
+            empresa=bono.empresa.title
+
+            return JsonResponse({ 'Msg' :"El usuario tiene cupon","cupon":cupon,"empresa":empresa})
+        except:
+            return JsonResponse({ 'Msg' :"El usuario no tiene bono"})
+
+    except:
+        return JsonResponse({ 'Msg' :"El usuario no exite"})
