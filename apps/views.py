@@ -125,20 +125,22 @@ def bonus_by_id(request,id):
     data={}
     try:
         client=get_object_or_404(Client, chat_id=id)
-        
-        bono=Bonus.objects.get(client=client,status=True).all()
-        i=1
-        for b in bono:
-            
-            cupon=bono.id
-            cupon=str(cupon)
-            empresa=bono.empresa.title
-            data.update({'cupon'+i:cupon,'empresa'+i:empresa})    
-            i=i+1
+        try:
+            bono=Bonus.objects.get(client=client,status=True).all()
+            i=1
+            if bono=!'':
+                for b in bono:
+                    
+                    cupon=bono.id
+                    cupon=str(cupon)
+                    empresa=bono.empresa.title
+                    data.update({'cupon'+i:cupon,'empresa'+i:empresa})    
+                    i=i+1
 
 
-        return JsonResponse(data)
-        
+                return JsonResponse(data)
+        except:
+            return JsonResponse({ 'Msg' :"El usuario no tiene bono"})
 
     except:
         return JsonResponse({ 'Msg' :"El usuario no exite"})
