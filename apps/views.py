@@ -60,9 +60,10 @@ def delete_bonus_client(request,id):
         bono.status=False
         cupon=bono.id
         bono.save()
-        client.points=client.points-bono.points
-        client.save()
-        ptos=client.points
+        bono.client.points=bono.client.points-bono.points
+        
+        bono.client.save()
+        ptos=bono.client.points
 
         return JsonResponse({ 'Msg' :"El usuario ha reclamado cupon","cupon":cupon,"puntos":ptos})
     except:
