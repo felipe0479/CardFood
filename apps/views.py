@@ -54,23 +54,21 @@ def get_bonus_client(request,id):
         return JsonResponse({ 'Msg' :"El usuario no exite"})
 
 def delete_bonus_client(request,id):
+    
     try:
-        client=get_object_or_404(Client, cedula=id)
-        try:
-            bono=get_object_or_404(Bonus,client=client,status=True)
-            bono.status=False
-            cupon=bono.id
-            bono.save()
-            client.points=client.points-bono.points
-            client.save()
-            ptos=client.points
+        bono=get_object_or_404(Bonus,id=id,status=True)
+        bono.status=False
+        cupon=bono.id
+        bono.save()
+        client.points=client.points-bono.points
+        client.save()
+        ptos=client.points
 
-            return JsonResponse({ 'Msg' :"El usuario ha reclamado cupon","cupon":cupon,"puntos":ptos})
-        except:
-            return JsonResponse({ 'Msg' :"El usuario no tiene bono"})
-
+        return JsonResponse({ 'Msg' :"El usuario ha reclamado cupon","cupon":cupon,"puntos":ptos})
     except:
-        return JsonResponse({ 'Msg' :"El usuario no exite"})
+        return JsonResponse({ 'Msg' :"No existe bono activo"})
+
+    
 
 def create_bonus_client(request,id,emp,pts):
     try:
@@ -137,8 +135,9 @@ def bonus_by_id(request,id):
                     print("entra en el for ")
                     cupon=b.id
                     cupon=str(cupon)
+                    points=cupon.points
                     empresa=b.empresa.title
-                    dic={'cupon':cupon,'empresa':empresa}
+                    dic={'cupon':cupon,'empresa':empresa,'puntos':points}
                     data.append(dic)    
                     print("imprimimos la data",data)
                     
