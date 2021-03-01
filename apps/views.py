@@ -57,13 +57,15 @@ def delete_bonus_client(request,id):
     
     try:
         bono=get_object_or_404(Bonus,id=id,status=True)
+        print("encuentra bonus")
         bono.status=False
         cupon=bono.id
         bono.save()
         bono.client.points=bono.client.points-bono.points
-        
+        print("aquiiiii")
         bono.client.save()
         ptos=bono.client.points
+        print("llega aqui")
 
         return JsonResponse({ 'Msg' :"El usuario ha reclamado cupon","cupon":cupon,"puntos":ptos})
     except:
