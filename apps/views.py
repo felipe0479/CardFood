@@ -135,7 +135,8 @@ def bonus_by_id(request,id):
                     print("entra en el for ")
                     cupon=b.id
                     cupon=str(cupon)
-                    points=cupon.points
+                    points=b.points
+
                     empresa=b.empresa.title
                     dic={'cupon':cupon,'empresa':empresa,'puntos':points}
                     data.append(dic)    
